@@ -1,0 +1,1702 @@
+ :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --primary-light: #818cf8;
+            --bg: #f1f5f9;
+            --surface: #ffffff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.1);
+            --radius: clamp(10px, 2vw, 16px);
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --sidebar-bg: #0f172a;
+            --sidebar-text: #94a3b8;
+            --danger: #ef4444;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+        }
+
+        body.dark {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --text: #f1f5f9;
+            --text-light: #94a3b8;
+            --border: #334155;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        /* ===== CSS ব্লক: রুট ভেরিয়েবল শেষ ===== */
+
+        /* ===== CSS ব্লক: রিসেট ও বেস শুরু ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Hind Siliguri", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background var(--transition), color var(--transition);
+            overflow-x: hidden;
+            min-height: 100vh;
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+        }
+
+        a,
+        button {
+            cursor: pointer;
+        }
+
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 10px;
+        }
+
+        /* ===== CSS ব্লক: রিসেট ও বেস শেষ ===== */
+
+        /* ===== CSS ব্লক: ইউটিলিটি ক্লাস শুরু ===== */
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .gap-2 {
+            gap: 0.5rem;
+        }
+
+        .gap-3 {
+            gap: 0.75rem;
+        }
+
+        .gap-4 {
+            gap: 1rem;
+        }
+
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+        }
+
+        .text-xs {
+            font-size: 0.75rem;
+        }
+
+        .text-lg {
+            font-size: clamp(1rem, 2vw, 1.125rem);
+        }
+
+        .text-xl {
+            font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .block {
+            display: block;
+        }
+
+        .inline-flex {
+            display: inline-flex;
+        }
+
+        .shadow {
+            box-shadow: var(--shadow);
+        }
+
+        .shadow-lg {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .rounded {
+            border-radius: var(--radius);
+        }
+
+        .rounded-full {
+            border-radius: 9999px;
+        }
+
+        .transition {
+            transition: var(--transition);
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+        }
+
+        .overflow-hidden {
+            overflow: hidden;
+        }
+
+        .overflow-y-auto {
+            overflow-y: auto;
+        }
+
+        .overflow-x-auto {
+            overflow-x: auto;
+        }
+
+        .z-50 {
+            z-index: 50;
+        }
+
+        .z-40 {
+            z-index: 40;
+        }
+
+        .z-30 {
+            z-index: 30;
+        }
+
+        /* ===== CSS ব্লক: ইউটিলিটি ক্লাস শেষ ===== */
+
+        /* ===== CSS ব্লক: ইমেজ শুরু ===== */
+        .img-circle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .img-circle img {
+            max-width: 10rem;
+            margin-bottom: 1rem;
+            border-radius: 50%;
+        }
+
+        .trackImg {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20rem;
+            max-width: 100%;
+            margin: 1rem auto;
+            height: auto;
+            aspect-ratio: 1 / 1;
+        }
+
+        .trackImg img {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        /* ===== CSS ব্লক: ইমেজ শেষ ===== */
+
+        /* ===== CSS ব্লক: লগইন শুরু ===== */
+        .login-wrapper {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        body.dark .login-wrapper {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+
+        .login-card {
+            background: var(--surface);
+            padding: clamp(1.5rem, 5vw, 2.8rem) clamp(1rem, 5vw, 2.2rem);
+            border-radius: 2rem;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 420px;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-card .logo {
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .login-card h2 {
+            text-align: center;
+            font-size: clamp(1.4rem, 5vw, 1.8rem);
+            font-weight: 700;
+        }
+
+        .login-card .subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 0.75rem;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 1rem;
+            transition: 0.2s;
+            outline: none;
+        }
+
+        .input-field:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15);
+        }
+
+        .input-field:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* ===== CSS ব্লক: লগইন শেষ ===== */
+
+        /* ===== CSS ব্লক: বাটন শুরু ===== */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background: #16a34a;
+            transform: translateY(-2px);
+        }
+
+        .btn-info {
+            background: var(--info);
+            color: #fff;
+        }
+
+        .btn-info:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        .btn-sm {
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+            border-radius: 0.5rem;
+            width: auto;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .disabled-btn {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .error-msg {
+            color: var(--danger);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+            text-align: center;
+        }
+
+        .lock-message {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--danger);
+            display: none;
+            background: rgba(239, 68, 68, 0.1);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+        }
+
+        .attempt-counter {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            display: none;
+        }
+
+        /* ===== CSS ব্লক: বাটন শেষ ===== */
+
+        /* ===== CSS ব্লক: সাইডবার শুরু ===== */
+        .dashboard-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .sidebar-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .sidebar {
+            width: min(260px, 80vw);
+            background: var(--sidebar-bg);
+            color: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 50;
+            transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem clamp(0.8rem, 2vw, 1rem);
+            overflow-y: auto;
+            box-shadow: 4px 0 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar.open {
+            transform: translateX(0);
+        }
+
+        .sidebar .brand {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
+            font-weight: 700;
+            padding: 0.5rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 1rem;
+        }
+
+        .sidebar .brand i {
+            font-size: 1.8rem;
+            color: var(--primary-light);
+        }
+
+        .sidebar-close {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .sidebar nav a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem 1rem;
+            border-radius: 0.75rem;
+            color: var(--sidebar-text);
+            text-decoration: none;
+            transition: 0.2s;
+            margin-bottom: 0.2rem;
+            font-weight: 500;
+            font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+        }
+
+        .sidebar nav a i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .sidebar-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 1rem;
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .sidebar-bottom button {
+            background: transparent;
+            border: none;
+            color: var(--sidebar-text);
+            padding: 0.7rem 1rem;
+            text-align: left;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            width: 100%;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+
+        .sidebar-bottom button:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        /* ===== CSS ব্লক: সাইডবার শেষ ===== */
+
+        /* ===== CSS ব্লক: মেইন কন্টেন্ট ও টপবার শুরু ===== */
+        .main-content {
+            flex: 1;
+            margin-left: 0;
+            transition: margin-left 0.3s;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .top-bar {
+            background: var(--surface);
+            padding: 0.8rem clamp(0.8rem, 2vw, 1.5rem);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .menu-toggle {
+            display: block;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            color: var(--text);
+            cursor: pointer;
+            padding: 0.2rem 0.5rem;
+        }
+
+        .page-title {
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            font-weight: 700;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .top-bar-actions {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .theme-toggle-btn {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            font-size: 1.1rem;
+            transition: 0.2s;
+        }
+
+        .theme-toggle-btn:hover {
+            background: var(--border);
+            transform: rotate(20deg);
+        }
+
+        .content-area {
+            padding: clamp(0.8rem, 3vw, 2rem);
+            flex: 1;
+        }
+
+        /* ===== CSS ব্লক: মেইন কন্টেন্ট ও টপবার শেষ ===== */
+
+        /* ===== CSS ব্লক: স্ট্যাটাস কার্ড শুরু ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+            gap: clamp(0.6rem, 2vw, 1.8rem);
+            margin-bottom: 1.8rem;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            padding: clamp(0.8rem, 2vw, 1.4rem) clamp(0.6rem, 2vw, 1.2rem);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid var(--border);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-icon {
+            width: clamp(36px, 6vw, 52px);
+            height: clamp(36px, 6vw, 52px);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            flex-shrink: 0;
+        }
+
+        .stat-icon.purple {
+            background: linear-gradient(135deg, #4f46e5, #818cf8);
+        }
+
+        .stat-icon.green {
+            background: linear-gradient(135deg, #22c55e, #4ade80);
+        }
+
+        .stat-icon.orange {
+            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+        }
+
+        .stat-icon.blue {
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+        }
+
+        .stat-info h3 {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: clamp(1.1rem, 3vw, 1.6rem);
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .stat-value small {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        /* ===== CSS ব্লক: স্ট্যাটাস কার্ড শেষ ===== */
+
+        /* ===== CSS ব্লক: কার্ড ও টেবিল শুরু ===== */
+        .card {
+            background: var(--surface);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 1.8rem;
+            border: 1px solid var(--border);
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-header {
+            padding: 0.8rem clamp(0.8rem, 2vw, 1.2rem);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            background: var(--bg);
+        }
+
+        .card-header h3 {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .badge {
+            background: var(--primary);
+            color: #fff;
+            padding: 0.15rem 0.9rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 0;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+            min-width: 700px;
+        }
+
+        thead th {
+            background: var(--bg);
+            color: var(--text-light);
+            font-weight: 700;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            padding: 0.7rem 0.8rem;
+            border-bottom: 2px solid var(--border);
+            text-align: left;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        thead th:hover {
+            background: var(--border);
+        }
+
+        tbody td {
+            padding: 0.6rem 0.8rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+            word-break: break-word;
+        }
+
+        tbody tr:hover {
+            background: var(--bg);
+        }
+
+        .row-number {
+            font-weight: 700;
+            color: var(--text-light);
+            text-align: center;
+            width: 30px;
+        }
+
+        .balance-cell {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        body.dark .balance-cell {
+            color: #a5b4fc;
+        }
+
+        .empty-row td {
+            text-align: center;
+            color: var(--text-light);
+            padding: 2.5rem;
+            font-style: italic;
+        }
+
+        .table-footer {
+            background: var(--bg);
+            font-weight: 700;
+            border-top: 2px solid var(--primary);
+        }
+
+        .table-footer td {
+            padding: 0.6rem 0.8rem;
+        }
+
+        .table-footer .total-label {
+            text-align: right;
+            color: var(--text-light);
+        }
+
+        .table-footer .total-value {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        /* ===== CSS ব্লক: কার্ড ও টেবিল শেষ ===== */
+
+        /* ===== CSS ব্লক: কাস্টম সার্চেবল সিলেক্ট (মৌজা) শুরু ===== */
+        .custom-select-wrapper {
+            flex: 2 1 140px;
+            min-width: 140px;
+            position: relative;
+        }
+
+        .mouza-search {
+            width: 100% !important;
+            padding-right: 2rem !important;
+        }
+
+        .custom-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            max-height: 200px;
+            overflow-y: auto;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            box-shadow: var(--shadow-lg);
+            list-style: none;
+            z-index: 10;
+            margin-top: 2px;
+            display: none;
+        }
+
+        .custom-options.open {
+            display: block;
+        }
+
+        .custom-options li {
+            padding: 0.5rem 0.8rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.15s;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .custom-options li:hover,
+        .custom-options li.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .custom-options li:last-child {
+            border-bottom: none;
+        }
+
+        .mouza-value {
+            display: none;
+        }
+
+        /* ===== CSS ব্লক: কাস্টম সার্চেবল সিলেক্ট শেষ ===== */
+
+        /* ===== CSS ব্লক: সার্চ বক্স শুরু ===== */
+        .search-box {
+            display: flex;
+            gap: 0.5rem;
+            flex: 1;
+            min-width: 160px;
+            position: relative;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 0.4rem 2.2rem 0.4rem 0.8rem;
+            border: 2px solid var(--border);
+            border-radius: 0.75rem;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        .search-clear {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: none;
+        }
+
+        .search-clear.visible {
+            display: block;
+        }
+
+        /* ===== CSS ব্লক: সার্চ বক্স শেষ ===== */
+
+        /* ===== CSS ব্লক: ডায়নামিক পেয়ার শুরু ===== */
+        .dynamic-pair {
+            background: var(--bg);
+            padding: 0.7rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin-bottom: 0.6rem;
+            position: relative;
+            transition: 0.2s;
+        }
+
+        .dynamic-pair:hover {
+            border-color: var(--primary);
+        }
+
+        .dynamic-pair .pair-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .dynamic-pair .pair-row select {
+            flex: 2 1 140px;
+            min-width: 100px;
+        }
+
+        .dynamic-pair .pair-row input {
+            width: 70px;
+            flex-shrink: 0;
+        }
+
+        .dynamic-pair .pair-remove {
+            position: absolute;
+            top: 6px;
+            right: 8px;
+            background: none;
+            border: none;
+            color: var(--danger);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: none;
+            transition: 0.2s;
+        }
+
+        .dynamic-pair .pair-remove.visible {
+            display: block;
+        }
+
+        .dynamic-pair .pair-remove:hover {
+            transform: scale(1.2);
+        }
+
+        .add-pair-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        }
+
+        .add-pair-btn:hover {
+            background: var(--primary-hover);
+            transform: scale(1.05);
+        }
+
+        /* ===== CSS ব্লক: ডায়নামিক পেয়ার শেষ ===== */
+
+        /* ===== CSS ব্লক: মোডাল শুরু ===== */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--surface);
+            border-radius: 1.5rem;
+            padding: clamp(1rem, 4vw, 2rem);
+            max-width: min(520px, 95vw);
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .modal h3 {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-actions .btn {
+            flex: 1 1 auto;
+            min-width: 80px;
+        }
+
+        .confirm-modal .icon {
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .confirm-modal .icon.warning {
+            color: var(--warning);
+        }
+
+        .confirm-modal .icon.danger {
+            color: var(--danger);
+        }
+
+        .confirm-modal p {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 1.2rem;
+            line-height: 1.6;
+            font-size: clamp(0.8rem, 2vw, 0.95rem);
+        }
+
+        /* ===== CSS ব্লক: মোডাল শেষ ===== */
+
+        /* ===== CSS ব্লক: চ্যাটবট শুরু ===== */
+        #chatBotContainer {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9998;
+        }
+
+        #chatToggle {
+            width: clamp(52px, 8vw, 64px);
+            height: clamp(52px, 8vw, 64px);
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4f46e5, #818cf8);
+            color: #fff;
+            border: none;
+            font-size: clamp(24px, 5vw, 30px);
+            box-shadow: 0 6px 30px rgba(79, 70, 229, 0.5);
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #chatToggle:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 40px rgba(79, 70, 229, 0.6);
+        }
+
+        #chatToggle .badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: var(--danger);
+            color: #fff;
+            font-size: 12px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            display: none;
+        }
+
+        #chatWindow {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: min(380px, calc(100vw - 30px));
+            height: min(450px, 60vh, 400px);
+            background: var(--surface);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            animation: slideUp 0.3s ease;
+        }
+
+        #chatWindow.open {
+            display: flex;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #4f46e5, #818cf8);
+            color: #fff;
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: clamp(0.9rem, 2vw, 1.05rem);
+        }
+
+        .chat-header button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.8rem;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: 0.2s;
+        }
+
+        .chat-header button:hover {
+            opacity: 1;
+            transform: rotate(90deg);
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 14px;
+            overflow-y: auto;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .chat-body .msg {
+            max-width: 80%;
+            padding: 10px 16px;
+            border-radius: 18px;
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            animation: fadeMsg 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .chat-body .msg.bot {
+            background: linear-gradient(135deg, #4f46e5, #818cf8);
+            color: #fff;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-body .msg.user {
+            background: var(--surface);
+            color: var(--text);
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        @keyframes fadeMsg {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .chat-footer {
+            display: flex;
+            padding: 10px 14px;
+            gap: 10px;
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .chat-footer input {
+            flex: 1;
+            padding: 10px 16px;
+            border: 2px solid var(--border);
+            border-radius: 30px;
+            outline: none;
+            font-size: clamp(0.85rem, 2vw, 0.95rem);
+            background: var(--bg);
+            color: var(--text);
+            transition: 0.2s;
+        }
+
+        .chat-footer input:focus {
+            border-color: var(--primary);
+        }
+
+        .chat-footer button {
+            background: linear-gradient(135deg, #4f46e5, #818cf8);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.2s;
+            flex-shrink: 0;
+            box-shadow: 0 4px 16px rgba(79, 70, 229, 0.3);
+        }
+
+        .chat-footer button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 24px rgba(79, 70, 229, 0.4);
+        }
+
+        /* ===== CSS ব্লক: চ্যাটবট শেষ ===== */
+
+        /* ===== CSS ব্লক: ওয়েবসাইট গ্রিড শুরু ===== */
+        .website-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+            gap: clamp(0.8rem, 2vw, 1.8rem);
+            margin-top: 1.5rem;
+        }
+
+        .website-card {
+            background: var(--surface);
+            padding: clamp(1rem, 3vw, 1.8rem) clamp(0.8rem, 2vw, 1.2rem);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6rem;
+            transition: 0.3s;
+            border: 1px solid var(--border);
+        }
+
+        .website-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-light);
+        }
+
+        .website-card i {
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: var(--primary);
+            transition: 0.3s;
+        }
+
+        .website-card:hover i {
+            transform: scale(1.1);
+        }
+
+        .website-card .name {
+            font-weight: 700;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+        }
+
+        .masked-link {
+            font-size: clamp(0.6rem, 1.5vw, 0.7rem);
+            font-family: monospace;
+            background: var(--bg);
+            padding: 0.2rem 0.8rem;
+            border-radius: 2rem;
+            color: var(--text-light);
+            word-break: break-all;
+        }
+
+        /* ===== CSS ব্লক: ওয়েবসাইট গ্রিড শেষ ===== */
+
+        /* ===== CSS ব্লক: ট্র্যাকিং শুরু ===== */
+        .tracking-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .tracking-stats .stat-box {
+            background: var(--bg);
+            padding: 0.4rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            font-size: clamp(0.75rem, 2vw, 0.9rem);
+        }
+
+        .tracking-stats .stat-box span {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .tracking-table-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+
+        .tracking-table-wrap table {
+            min-width: 600px;
+            font-size: clamp(0.75rem, 1.5vw, 0.85rem);
+        }
+
+        .tracking-table-wrap th {
+            font-size: 0.65rem;
+        }
+
+        .loc-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: clamp(0.6rem, 1.5vw, 0.7rem);
+            background: rgba(79, 70, 229, 0.08);
+            padding: 2px 10px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: 0.2s;
+        }
+
+        .loc-link:hover {
+            background: rgba(79, 70, 229, 0.2);
+        }
+
+        .map-container {
+            margin-top: 1.5rem;
+        }
+
+        #trackingMap {
+            width: 100%;
+            height: clamp(220px, 40vh, 380px);
+            border-radius: var(--radius);
+            border: 2px solid var(--border);
+            background: var(--bg);
+            min-height: 180px;
+        }
+
+        .map-placeholder {
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg);
+            border-radius: var(--radius);
+            border: 2px dashed var(--border);
+            color: var(--text-light);
+            gap: 0.5rem;
+        }
+
+        /* ===== CSS ব্লক: ট্র্যাকিং শেষ ===== */
+
+        /* ===== CSS ব্লক: প্রিন্ট শুরু ===== */
+        .print-invoice {
+            padding: 1.5rem;
+            background: #fff;
+            color: #1e293b;
+            border-radius: var(--radius);
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .print-invoice h2 {
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+        }
+
+        .print-invoice .row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            border-bottom: 1px dashed #e2e8f0;
+            flex-wrap: wrap;
+        }
+
+        .print-invoice .row .label {
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .print-invoice .row .value {
+            font-weight: 700;
+        }
+
+        .print-invoice .stamp {
+            text-align: center;
+            margin-top: 1rem;
+            border: 2px dashed var(--primary);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+
+        /* ===== CSS ব্লক: প্রিন্ট শেষ ===== */
+
+        /* ===== CSS ব্লক: দলিল লিখা পেজ শুরু ===== */
+        .doc_container {
+            background: #dce1e9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 28px 16px;
+            font-family: 'Noto Sans Bengali', 'SolaimanLipi', 'Arial Unicode MS', sans-serif;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #1a1e2a;
+            max-width: 100%;
+            width: 100rem;
+        }
+
+        .legel_document {
+            width: 8.5in;
+            min-height: 14in;
+            background: #fefcf7;
+            padding: 0.7in 0.65in 0.5in 0.65in;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            border-radius: 6px;
+            position: relative;
+            transition: all 0.2s;
+            font-family: "Noto Sans Bengali", sans-serif;
+        }
+
+        .doc_header_first {
+            position: absolute;
+            top: 60%;
+        }
+
+        .doc_header_first .dolilTitle {
+            text-align: center;
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            font-family: "Noto Sans Bengali", sans-serif;
+        }
+
+        table tr,
+        th,
+        td {
+            border: 1px solid grey;
+        }
+
+        /* ===== CSS ব্লক: দলিল লিখা পেজ শেষ ===== */
+
+        /* ===== CSS ব্লক: ফুটার শুরু ===== */
+        .main-footer {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            padding: 1.2rem clamp(1rem, 3vw, 2rem);
+            margin-top: auto;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.03);
+            transition: background var(--transition), border-color var(--transition);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .footer-copyright strong {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a i {
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        /* ===== CSS ব্লক: ফুটার শেষ ===== */
+
+        /* ===== CSS ব্লক: রেস্পন্সিভ মিডিয়া কোয়েরিজ শুরু ===== */
+        @media (max-width: 767px) {
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .sidebar-close {
+                display: block;
+            }
+
+            .top-bar {
+                padding: 0.6rem 0.8rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+
+            .stat-card {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+            }
+
+            .stat-icon {
+                align-self: flex-start;
+            }
+
+            table {
+                font-size: 0.75rem;
+                min-width: 500px;
+            }
+
+            .modal {
+                padding: 1rem;
+                max-width: 95vw;
+            }
+
+            #chatWindow {
+                width: calc(100vw - 30px);
+                height: min(400px, 60vh);
+            }
+
+            #chatToggle {
+                width: 52px;
+                height: 52px;
+                font-size: 24px;
+            }
+
+            .login-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .dynamic-pair .pair-row select {
+                flex: 1 1 100%;
+            }
+
+            .dynamic-pair .pair-row input {
+                width: 100%;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .sidebar {
+                transform: translateX(0);
+                position: static;
+                width: 240px;
+            }
+
+            .sidebar-close {
+                display: none !important;
+            }
+
+            .menu-toggle {
+                display: none;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .website-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .sidebar {
+                width: 260px;
+            }
+
+            .stats-grid {
+                gap: 1.5rem;
+            }
+
+            .website-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 1.5rem;
+            }
+
+            .content-area {
+                padding: 2rem;
+            }
+
+            #chatWindow {
+                width: 420px;
+                height: 480px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .stats-grid {
+                gap: 1.8rem;
+            }
+
+            .website-grid {
+                gap: 1.8rem;
+            }
+
+            .content-area {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 2rem 1rem;
+            }
+        }

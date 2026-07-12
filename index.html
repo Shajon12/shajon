@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="bn">
+
+<head>
+    <!-- ============================================================
+    HTML ব্লক: মেটা ও টাইটেল শুরু
+    ============================================================ -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>দলিল ব্যবস্থাপনা | আমি সাজন</title>
+    <!-- ============================================================ -->
+    <!-- ============================================================
+    HTML ব্লক: বাহ্যিক লাইব্রেরি (CDN) শুরু
+    ============================================================ -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js" defer></script>
+    <script src="js/script.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="favicon.ico" />
+</head>
+
+<body>
+
+    <!-- ============================================================
+    HTML ব্লক: টোস্ট কন্টেইনার শুরু
+    ============================================================ -->
+    <div id="toastContainer"
+        style="position:fixed; top:20px; right:20px; z-index:9999; display:flex; flex-direction:column; gap:8px; max-width:380px; width:100%; pointer-events:none;">
+    </div>
+    <!-- ============================================================ -->
+
+
+    <!-- ============================================================
+    HTML ব্লক: লগইন স্ক্রিন শুরু
+    ============================================================ -->
+    <div id="loginScreen" class="login-wrapper">
+        <div class="login-card">
+            <div class="logo"><i class="fas fa-file-contract"></i></div>
+            <h2>দলিল ব্যবস্থাপনা</h2>
+            <p class="subtitle">লগইন করে ড্যাশবোর্ড অ্যাক্সেস করুন</p>
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="loginUsername" class="input-field" placeholder="admin" autocomplete="off" />
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="loginPassword" class="input-field" placeholder="1234" />
+                <div id="loginLockMessage" class="lock-message"><i class="fas fa-clock"></i> <span
+                        id="lockTimerDisplay">0.15</span> মিনিট পর আবার চেষ্টা করুন।</div>
+            </div>
+            <button class="btn btn-primary" id="loginBtn" onclick="login()"><i
+                    class="fas fa-arrow-right-to-bracket"></i> প্রবেশ করুন</button>
+            <p id="loginError" class="error-msg">ইউজারনেম বা পাসওয়ার্ড ভুল।</p>
+            <div id="attemptCounter" class="attempt-counter"><i class="fas fa-exclamation-triangle"></i> ভুল প্রচেষ্টা:
+                <span id="attemptCountDisplay">0</span>/৩
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================ -->
+
+
+    <!-- ============================================================
+    HTML ব্লক: ড্যাশবোর্ড লেআউট শুরু
+    ============================================================ -->
+    <div id="dashboardLayout" class="dashboard-layout" style="display:none;">
+
+        <!-- ===== সাইডবার ওভারলে ===== -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- ===== সাইডবার ===== -->
+        <aside class="sidebar" id="sidebar">
+            <div class="brand">
+                <div><i class="fas fa-layer-group"></i> আমি সাজন</div>
+                <button class="sidebar-close" id="sidebarClose"><i class="fas fa-times"></i></button>
+            </div>
+            <nav>
+                <a href="#" id="navDashboard" class="active"><i class="fas fa-th-large"></i> ড্যাশবোর্ড</a>
+                <a href="#" id="navAddUser" onclick="openAddUserModal()"><i class="fas fa-user-plus"></i> ইউজার
+                    অ্যাড</a>
+                <a href="#" id="navDolilLekha"><i class="fas fa-pen"></i> দলিল লিখা</a>
+                <a href="#" id="navWebsiteList"><i class="fas fa-globe"></i> ওয়েবসাইট লিস্ট</a>
+                <a href="#" id="navTracking"><i class="fas fa-eye"></i> ট্র্যাকিং</a>
+            </nav>
+            <div class="sidebar-bottom">
+                <button id="darkModeSidebar" onclick="toggleDarkMode()"><i class="fas fa-moon"></i> ডার্ক মোড</button>
+                <button onclick="logout()"><i class="fas fa-sign-out-alt"></i> লগআউট</button>
+            </div>
+        </aside>
+
+        <!-- ===== মেইন কন্টেন্ট ===== -->
+        <main class="main-content">
+
+            <!-- ===== টপবার ===== -->
+            <header class="top-bar">
+                <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+                <h2 class="page-title" id="pageTitle">ড্যাশবোর্ড</h2>
+                <div class="top-bar-actions">
+                    <button class="theme-toggle-btn" onclick="toggleDarkMode()"><i class="fas fa-moon"></i></button>
+                </div>
+            </header>
+
+            <!-- ===== কন্টেন্ট এরিয়া ===== -->
+            <div class="content-area">
+
+                <!-- ===== ড্যাশবোর্ড পেজ ===== -->
+                <div id="dashboardContent">
+                    <!-- স্ট্যাটাস গ্রিড -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon purple"><i class="fas fa-users"></i></div>
+                            <div class="stat-info">
+                                <h3>মোট দলিল লেখক</h3>
+                                <div class="stat-value" id="totalUsersStat">0</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon green"><i class="fas fa-coins"></i></div>
+                            <div class="stat-info">
+                                <h3>মোট ব্যালেন্স</h3>
+                                <div class="stat-value" id="totalBalanceStat">0 <small>টাকা</small></div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon orange"><i class="fas fa-history"></i></div>
+                            <div class="stat-info">
+                                <h3>২০২৩-২০২৬ মোট দলিল</h3>
+                                <div class="stat-value" id="systemCounterStat">1200 <small>(স্থায়ী)</small></div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon blue"><i class="fas fa-plus-circle"></i></div>
+                            <div class="stat-info">
+                                <h3>বর্তমান সিরিয়াল</h3>
+                                <div class="stat-value" id="currentSerialStat">1201</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- চার্ট কার্ড -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-chart-pie" style="color:var(--primary);"></i> মৌজা ভিত্তিক দলিল
+                                পরিসংখ্যান</h3>
+                        </div>
+                        <div class="card-body">
+                            <div style="padding:0.8rem; height:200px;"><canvas id="mouzaChart"></canvas></div>
+                        </div>
+                    </div>
+
+                    <!-- দলিল তালিকা কার্ড -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-list-ul" style="color:var(--primary);"></i> দলিল তালিকা <span
+                                    class="badge" id="tableCount">0 জন</span></h3>
+                            <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                                <button class="btn btn-success btn-sm" onclick="exportExcel()"><i
+                                        class="fas fa-file-excel"></i> Excel</button>
+                                <button class="btn btn-info btn-sm" onclick="exportCSV()"><i
+                                        class="fas fa-file-csv"></i> CSV</button>
+                                <button class="btn btn-danger btn-sm" onclick="openResetConfirmModal()"><i
+                                        class="fas fa-trash-alt"></i> সব ডিলিট করুন একসাথে</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div
+                                style="padding:0.6rem 0.8rem; display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center; border-bottom:1px solid var(--border);">
+                                <div class="search-box">
+                                    <input type="text" id="searchInput" placeholder="🔍 নাম, মৌজা বা সনদ নং..."
+                                        oninput="window.handleSearchInput()" />
+                                    <button class="search-clear" id="searchClearBtn" onclick="window.clearSearch()"><i
+                                            class="fas fa-times-circle"></i></button>
+                                </div>
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th onclick="sortTable(0)"># <i class="fas fa-sort"></i></th>
+                                        <th onclick="sortTable(1)">নাম <i class="fas fa-sort"></i></th>
+                                        <th onclick="sortTable(2)">সনদ নং <i class="fas fa-sort"></i></th>
+                                        <th onclick="sortTable(3)">মৌজা <i class="fas fa-sort"></i></th>
+                                        <th onclick="sortTable(4)">প্রকৃতি <i class="fas fa-sort"></i></th>
+                                        <th onclick="sortTable(5)">তারিখ <i class="fas fa-sort"></i></th>
+                                        <th onclick="sortTable(6)">ব্যালেন্স <i class="fas fa-sort"></i></th>
+                                        <th onclick="sortTable(7)">কাজ <i class="fas fa-sort"></i></th>
+                                        <th>অ্যাকশন</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="userTableBody">
+                                    <tr class="empty-row">
+                                        <td colspan="9"><i class="fas fa-inbox"></i> কোনো ডাটা নেই।</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot id="tableFooter" style="display:none;">
+                                    <tr class="table-footer">
+                                        <td colspan="7" class="total-label">📊 সর্বমোট কাজের পরিসংখ্যান</td>
+                                        <td id="totalWorkCount" class="total-value">০</td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== দলিল লিখা পেজ ===== -->
+                <div id="dolilLekhaPage" style="display:none;">
+                    <h2 style="font-size:1.3rem; margin-bottom:0.5rem;"><i class="fas fa-pen"
+                            style="color:var(--primary);"></i> দলিল লিখা</h2>
+                    <div class="doc_container">
+                        <div class="legel_document">
+                            <div class="doc_header_first">
+                                <h1 class="dolilTitle" contenteditable="true"> হেবা বিষয়ক ঘোষনা পত্র দলিল</h1>
+                                <p class="officeName"> ১। রেজিস্ট্রী অফিসের নামঃ সরাইল সাব-রেজিষ্ট্রারের কার্য্যলয়। </p>
+                                <p class="sarSongkhep"> ২। দলিলের সার সংক্ষেপঃ </p>
+                                <table style="width: 100%; text-align: center;">
+                                    <tr>
+                                        <th>দলিলের প্রকৃতি</th>
+                                        <th>মৌজার নাম</th>
+                                        <th>ইউনিয়ন</th>
+                                        <th>উপজেলা</th>
+                                        <th>জেলা</th>
+                                    </tr>
+                                    <tr>
+                                        <td>হেবা বিষয়ক ঘোষনা পত্র</td>
+                                        <td>সরাইল <br> সাবেক - ১৮১ নং <br> হালে - ৪৯ নং </td>
+                                        <td>সরাইল</td>
+                                        <td>সরাইল</td>
+                                        <td>ব্রাহ্মণবাড়িয়া</td>
+                                    </tr>
+                                </table>
+                                <table style="width: 100%; text-align: center;"><br>
+                                    <tr>
+                                        <th> হস্তান্তরিত সম্পত্তির পরিমাণ ( অংকে ও কথায়)</th>
+                                        <th> ভূমির শ্রেণী</th>
+                                        <th>মূল্য (অংকে ও কথায়)</th>
+                                    </tr>
+                                    <tr>
+                                        <td> ৭.২০ সাত শতক বিশ পয়েন্ট </td>
+                                        <td> বাড়ী ভূমি <br> স্থাপনা বিহীন </td>
+                                        <td> ২০,৫০,০০০/= বিশ লক্ষ পঞ্চাশ হাজার টাকা </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== ওয়েবসাইট লিস্ট পেজ ===== -->
+                <div id="websiteListPage" style="display:none;">
+                    <h2 style="font-size:1.3rem; margin-bottom:1rem;"><i class="fas fa-globe"
+                            style="color:var(--primary);"></i> ওয়েবসাইট লিস্ট</h2>
+                    <p style="color:var(--text-light); margin-bottom:1.2rem;">প্রয়োজনীয় ওয়েবসাইটগুলো</p>
+                    <div class="website-grid" id="websiteGrid"></div>
+                </div>
+
+                <!-- ===== ট্র্যাকিং পেজ ===== -->
+                <div id="trackingPage" style="display:none;">
+                    <h2 style="font-size:1.3rem; margin-bottom:0.5rem;"><i class="fas fa-eye"
+                            style="color:var(--primary);"></i> ট্র্যাকিং ডেটা <span
+                            style="background:var(--success); color:#fff; font-size:0.7rem; padding:0.1rem 0.8rem; border-radius:999px;">GPS
+                            সক্রিয়</span></h2>
+                    <p style="color:var(--text-light); margin-bottom:1rem;">এখানে সকল ভিজিটরের ডিভাইস, ব্রাউজার, আইপি ও
+                        জিপিএস লোকেশন সংরক্ষিত আছে।</p>
+                    <div id="trackingContent"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- ============================================================ -->
+
+
+    <!-- ============================================================
+    HTML ব্লক: সকল মোডাল শুরু
+    ============================================================ -->
+
+    <!-- ইউজার অ্যাড মোডাল -->
+    <div id="addUserModal" class="modal-overlay">
+        <div class="modal">
+            <h3><i class="fas fa-user-plus" style="color:var(--primary);"></i> <span id="modalTitle">দলিল লিখক এর তথ্য
+                    দিন</span></h3>
+            <div class="input-group">
+                <label>দলিল লিখক এর নাম <span
+                        style="background:var(--success); color:#fff; font-size:0.6rem; padding:0.1rem 0.6rem; border-radius:999px;">নির্বাচন</span></label>
+                <select id="writerName" class="input-field">
+                    <option value="">-- নাম --</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>সনদ নম্বর <span
+                        style="background:var(--success); color:#fff; font-size:0.6rem; padding:0.1rem 0.6rem; border-radius:999px;">অটো</span></label>
+                <input type="text" id="certNo" class="input-field" readonly placeholder="নাম সিলেক্ট করলে অটো হবে" />
+            </div>
+            <div class="input-group">
+                <label>মৌজা ও প্রকৃতি <span
+                        style="background:var(--success); color:#fff; font-size:0.6rem; padding:0.1rem 0.6rem; border-radius:999px;">একাধিক
+                        যোগ করুন</span></label>
+                <div id="pairContainer"></div>
+                <button type="button" class="add-pair-btn" onclick="window.addPair()"><i
+                        class="fas fa-plus"></i></button>
+            </div>
+            <div class="input-group">
+                <label>মোট কাজের সংখ্যা (অটো)</label>
+                <input type="number" id="workCount" class="input-field" value="0" readonly
+                    style="font-weight:700; color:var(--primary); background:var(--bg);" />
+            </div>
+            <input type="hidden" id="editIndex" value="-1" />
+            <div class="modal-actions">
+                <button class="btn btn-danger" onclick="closeAddUserModal()"><i class="fas fa-times"></i> বাতিল</button>
+                <button class="btn btn-primary" onclick="saveUser()"><i class="fas fa-save"></i> <span
+                        id="saveBtnText">সংরক্ষণ</span></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- রিসেট কনফার্মেশন মোডাল -->
+    <div id="resetConfirmModal" class="modal-overlay">
+        <div class="modal confirm-modal">
+            <div class="icon warning"><i class="fas fa-exclamation-triangle"></i></div>
+            <h3 style="justify-content:center;">⚠️ সতর্কতা</h3>
+            <p><strong>সব ডাটা মুছে ফেলা হবে!</strong><br />আপনি কি নিশ্চিত?<br /><span
+                    style="color:var(--text-light); font-size:0.8rem;">(অপসারণযোগ্য)</span></p>
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeResetConfirmModal()">বাতিল</button>
+                <button class="btn btn-danger" onclick="confirmReset()">হ্যাঁ, রিসেট করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ডিলিট কনফার্মেশন মোডাল -->
+    <div id="deleteConfirmModal" class="modal-overlay">
+        <div class="modal confirm-modal">
+            <div class="icon danger"><i class="fas fa-user-slash"></i></div>
+            <h3 style="justify-content:center;">🗑️ ইউজার ডিলিট</h3>
+            <p>আপনি কি এই ইউজারটিকে <strong>মুছে ফেলতে</strong> চান?<br /><span
+                    style="color:var(--text-light); font-size:0.8rem;">(অপসারণযোগ্য)</span></p>
+            <div class="modal-actions">
+                <button class="btn btn-outline" onclick="closeDeleteConfirmModal()">বাতিল</button>
+                <button class="btn btn-danger" onclick="confirmDelete()">হ্যাঁ, মুছুন</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- প্রিন্ট মোডাল -->
+    <div id="printModal" class="modal-overlay">
+        <div class="modal" style="max-width:600px;">
+            <h3><i class="fas fa-print" style="color:var(--primary);"></i> দলিল রসিদ</h3>
+            <div id="printContent" class="print-invoice"></div>
+            <div class="modal-actions">
+                <button class="btn btn-danger"
+                    onclick="document.getElementById('printModal').style.display='none'">বন্ধ</button>
+                <button class="btn btn-primary" onclick="window.print()">প্রিন্ট করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ওয়েবসাইট পাসওয়ার্ড মোডাল -->
+    <div id="websitePasswordModal" class="modal-overlay">
+        <div class="modal password-modal">
+            <div class="img-circle"><img src="img/legend.PNG" alt="ওয়েবসাইট আইকন"></div>
+            <h3 style="justify-content:center;"><i class="fas fa-globe" style="color:var(--warning);"></i> ওয়েবসাইট
+                লিস্ট অ্যাক্সেস করতে</h3>
+            <p style="text-align:center; color:var(--text-light); margin-bottom:1rem;">পাসওয়ার্ড দিন</p>
+            <input type="password" id="websitePasswordInput" class="input-field" placeholder="পাসওয়ার্ড"
+                autocomplete="off" />
+            <p id="websitePassError" style="color:var(--danger); font-size:0.8rem; margin-top:0.3rem; display:none;">ভুল
+                পাসওয়ার্ড!</p>
+            <div class="modal-actions">
+                <button class="btn btn-danger" onclick="closeWebsitePasswordModal()">বাতিল</button>
+                <button class="btn btn-primary" onclick="verifyWebsitePassword()">যাচাই</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ট্র্যাকিং পাসওয়ার্ড মোডাল -->
+    <div id="trackingPasswordModal" class="modal-overlay">
+        <div class="modal password-modal">
+            <div class="trackImg"><img src="img/shajon.jpg" alt="Shajon" /></div>
+            <h3 style="justify-content:center;"><i class="fas fa-lock" style="color:var(--warning);"></i> ট্র্যাকিং পেজ
+                অ্যাক্সেস</h3>
+            <p style="text-align:center; color:var(--text-light); margin-bottom:1rem;">পাসওয়ার্ড দিন</p>
+            <input type="password" id="trackingPasswordInput" class="input-field" placeholder="পাসওয়ার্ড"
+                autocomplete="off" />
+            <p id="trackingPassError" style="color:var(--danger); font-size:0.8rem; margin-top:0.3rem; display:none;">
+                ভুল পাসওয়ার্ড!</p>
+            <div class="modal-actions">
+                <button class="btn btn-danger" onclick="closeTrackingPasswordModal()">বাতিল</button>
+                <button class="btn btn-primary" onclick="verifyTrackingPassword()">যাচাই</button>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================ -->
+
+
+    <!-- ============================================================
+    HTML ব্লক: গ্লোবাল ফুটার শুরু
+    ============================================================ -->
+    <footer class="main-footer" id="mainFooter">
+        <div class="footer-content">
+            <div class="footer-copyright">&copy; <span id="footerYear">2026</span> <strong>আমি সাজন</strong></div>
+            <div class="footer-links" id="footerLinks">
+                <a href="#" id="footerContactBtn"><i class="fas fa-envelope"></i> যোগাযোগ</a>
+            </div>
+        </div>
+    </footer>
+    <!-- ============================================================ -->
+
+
+    <!-- ============================================================
+    HTML ব্লক: যোগাযোগ মোডাল শুরু
+    ============================================================ -->
+    <div id="contactModal" class="modal-overlay">
+        <div class="modal" style="max-width:450px;">
+            <h3 style="justify-content:center;"><i class="fas fa-paper-plane" style="color:var(--primary);"></i> যোগাযোগ
+                করুন</h3>
+            <p style="text-align:center; color:var(--text-light); margin-bottom:1.2rem; font-size:0.9rem;">আপনার নাম,
+                ইমেইল ও ফোন নম্বর দিন। আমরা শীঘ্রই যোগাযোগ করব।</p>
+            <div class="input-group">
+                <label><i class="fas fa-user"></i> আপনার নাম</label>
+                <input type="text" id="contactName" class="input-field" placeholder="আপনার নাম লিখুন" />
+            </div>
+            <div class="input-group">
+                <label><i class="fas fa-envelope"></i> ইমেইল</label>
+                <input type="email" id="contactEmail" class="input-field" placeholder="example@mail.com" />
+            </div>
+            <div class="input-group">
+                <label><i class="fas fa-phone"></i> ফোন নম্বর</label>
+                <input type="tel" id="contactPhone" class="input-field" placeholder="+880 1XXX-XXXXXX" />
+            </div>
+            <p id="contactFormError" style="color:var(--danger); font-size:0.8rem; text-align:center; display:none;">সব
+                তথ্য পূরণ করুন</p>
+            <div class="modal-actions">
+                <button class="btn btn-danger" onclick="closeContactModal()"><i class="fas fa-times"></i> বাতিল</button>
+                <button class="btn btn-primary" onclick="submitContact()"><i class="fas fa-paper-plane"></i>
+                    পাঠান</button>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================ -->
+
+
+    <!-- ============================================================
+    HTML ব্লক: চ্যাটবট শুরু
+    ============================================================ -->
+    <div id="chatBotContainer">
+        <button id="chatToggle" onclick="toggleChat()" title="চ্যাট খুলুন">
+            <i class="fas fa-comment-dots"></i>
+            <span class="badge" id="chatBadge">1</span>
+        </button>
+        <div id="chatWindow">
+            <div class="chat-header">
+                <span><i class="fas fa-robot"></i> আপনার সহকারী</span>
+                <button onclick="toggleChat()">&times;</button>
+            </div>
+            <div class="chat-body" id="chatBody"></div>
+            <div class="chat-footer">
+                <input type="text" id="chatInput" placeholder=" আপনার প্রশ্ন করুন..." />
+                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
