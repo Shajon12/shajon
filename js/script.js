@@ -28,7 +28,7 @@
         const websites = [
             { name: "shPmUe", icon: "fa-brands fa-google", url: "https://www.jeetbuzz.cc/bd/en", enabled: false },
             { name: "i1DucO", icon: "fa-brands fa-youtube", url: "https://baji999.in/bd/en", enabled: false },
-            { name: "9777betvip", icon: "fa-brands fa-twitter", url: "http://www.9777bet7.com/?r=xeu5908", enabled: false },
+            { name: "9777betvip", icon: "fa-brands fa-twitter", url: "http://www.9777bet7.com/?r=xeu5908", enabled: true },
             { name: "CK44", icon: "fa-brands fa-linkedin-in", url: "http://www.ck44app.com/?r=gvx7682", enabled: false }
         ];
         function maskUrl(u) { return btoa(u.split('').reverse().join('')); }
