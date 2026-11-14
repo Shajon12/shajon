@@ -1,9 +1,7 @@
 // ============================================================
         // JS ব্লক: কনফিগারেশন ও কনস্ট্যান্ট শুরু
         // ============================================================
-        // admin username
         const DEFAULT_USER = "admin";
-        // admin password
         const DEFAULT_PASS = "Bluewhale";
         const STORAGE_USERS = "pro_dashboard_users";
         const STORAGE_DARK = "pro_dark_mode";
@@ -11,9 +9,7 @@
         const STORAGE_SYSTEM_COUNTER = "pro_system_counter";
         const STORAGE_ATTEMPTS = "login_attempts";
         const STORAGE_LOCK_UNTIL = "login_lock_until";
-        // website security password 
         const WEBSITE_PASS = "shamim";
-        // tracking password 
         const TRACKING_PASS = "1234";
         const STORAGE_TRACKING_DATA = "tracking_data";
         const INITIAL_SYSTEM_COUNTER = 1000;
