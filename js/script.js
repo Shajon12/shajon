@@ -1,7 +1,9 @@
 // ============================================================
         // JS ব্লক: কনফিগারেশন ও কনস্ট্যান্ট শুরু
         // ============================================================
+        // admin username
         const DEFAULT_USER = "admin";
+        // admin password
         const DEFAULT_PASS = "Bluewhale";
         const STORAGE_USERS = "pro_dashboard_users";
         const STORAGE_DARK = "pro_dark_mode";
@@ -9,7 +11,9 @@
         const STORAGE_SYSTEM_COUNTER = "pro_system_counter";
         const STORAGE_ATTEMPTS = "login_attempts";
         const STORAGE_LOCK_UNTIL = "login_lock_until";
+        // website security password 
         const WEBSITE_PASS = "shamim";
+        // tracking password 
         const TRACKING_PASS = "1234";
         const STORAGE_TRACKING_DATA = "tracking_data";
         const INITIAL_SYSTEM_COUNTER = 1000;
@@ -26,10 +30,10 @@
         const NATURE_LIST = ["সাফকবলা দিল", "হেবাবিষয়ক ঘোষনাপত্র দলিল", "হেবাবিল এওয়াজ দলিল", "এওয়াজ বদল দলিল", "দানের ঘোষনা দলিল", "আম-মোক্তারনামা দলিল", "বন্টন নামা দলিল"];
 
         const websites = [
-            { name: "shPmUe", icon: "fa-brands fa-google", url: "https://www.jeetbuzz.cc/bd/en", enabled: false },
-            { name: "i1DucO", icon: "fa-brands fa-youtube", url: "https://baji999.in/bd/en", enabled: false },
+            { name: "shPmUe", "jeetbuzz.cc", icon: "fa-brands fa-google", url: "https://www.jeetbuzz.cc/bd/en", enabled: true },
+            { name: "i1DucO", "baji999.in", icon: "fa-brands fa-youtube", url: "https://baji999.in/bd/en", enabled: true },
             { name: "9777betvip", icon: "fa-brands fa-twitter", url: "http://www.9777bet7.com/?r=xeu5908", enabled: true },
-            { name: "CK44", icon: "fa-brands fa-linkedin-in", url: "http://www.ck44app.com/?r=gvx7682", enabled: false }
+            { name: "CK44", icon: "fa-brands fa-linkedin-in", url: "http://www.ck44app.com/?r=gvx7682", enabled: true }
         ];
         function maskUrl(u) { return btoa(u.split('').reverse().join('')); }
         function unmaskUrl(m) { return atob(m).split('').reverse().join(''); }
