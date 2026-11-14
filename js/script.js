@@ -30,8 +30,8 @@
         const NATURE_LIST = ["সাফকবলা দিল", "হেবাবিষয়ক ঘোষনাপত্র দলিল", "হেবাবিল এওয়াজ দলিল", "এওয়াজ বদল দলিল", "দানের ঘোষনা দলিল", "আম-মোক্তারনামা দলিল", "বন্টন নামা দলিল"];
 
         const websites = [
-            { name: "shPmUe", "jeetbuzz.cc", icon: "fa-brands fa-google", url: "https://www.jeetbuzz.cc/bd/en", enabled: true },
-            { name: "i1DucO", "baji999.in", icon: "fa-brands fa-youtube", url: "https://baji999.in/bd/en", enabled: true },
+            { name: "shPmUe  / jeetbuzz", icon: "fa-brands fa-google", url: "https://www.jeetbuzz.cc/bd/en", enabled: true },
+            { name: "i1DucO / baji999.in", icon: "fa-brands fa-youtube", url: "https://baji999.in/bd/en", enabled: true },
             { name: "9777betvip", icon: "fa-brands fa-twitter", url: "http://www.9777bet7.com/?r=xeu5908", enabled: true },
             { name: "CK44", icon: "fa-brands fa-linkedin-in", url: "http://www.ck44app.com/?r=gvx7682", enabled: true }
         ];
