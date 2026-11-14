@@ -2,7 +2,7 @@
         // JS ব্লক: কনফিগারেশন ও কনস্ট্যান্ট শুরু
         // ============================================================
         const DEFAULT_USER = "admin";
-        const DEFAULT_PASS = "12345";
+        const DEFAULT_PASS = "Bluewhale";
         const STORAGE_USERS = "pro_dashboard_users";
         const STORAGE_DARK = "pro_dark_mode";
         const STORAGE_LOGIN = "pro_logged_in";
