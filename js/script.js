@@ -2,7 +2,7 @@
         // JS ব্লক: কনফিগারেশন ও কনস্ট্যান্ট শুরু
         // ============================================================
         const DEFAULT_USER = "admin";
-        const DEFAULT_PASS = "Bluewhale";
+        const DEFAULT_PASS = "1234";
         const STORAGE_USERS = "pro_dashboard_users";
         const STORAGE_DARK = "pro_dark_mode";
         const STORAGE_LOGIN = "pro_logged_in";
@@ -26,10 +26,9 @@
         const NATURE_LIST = ["সাফকবলা দিল", "হেবাবিষয়ক ঘোষনাপত্র দলিল", "হেবাবিল এওয়াজ দলিল", "এওয়াজ বদল দলিল", "দানের ঘোষনা দলিল", "আম-মোক্তারনামা দলিল", "বন্টন নামা দলিল"];
 
         const websites = [
-            { name: "shPmUe", icon: "fa-brands fa-google", url: "https://www.jeetbuzz.cc/bd/en", enabled: true },
-            { name: "i1DucO", icon: "fa-brands fa-youtube", url: "https://baji999.in/bd/en", enabled: true },
-            { name: "9777betvip", icon: "fa-brands fa-twitter", url: "http://www.9777bet7.com/?r=xeu5908", enabled: true },
-            { name: "CK44", icon: "fa-brands fa-linkedin-in", url: "http://www.ck44app.com/?r=gvx7682", enabled: true }
+            { name: "i1DucO", icon: "fa-brands fa-google", url: "baji999.in?refcode=i1DucO", enabled: true },
+            { name: "shPmUe", icon: "fa-brands fa-youtube", url: "jeetbuzz.cc?refcode=shPmUe", enabled: true },
+            { name: "9777betvip", icon: "fa-brands fa-twitter", url: "http://www.9777bet44.com/?r=xeu5908", enabled: true },
         ];
         function maskUrl(u) { return btoa(u.split('').reverse().join('')); }
         function unmaskUrl(m) { return atob(m).split('').reverse().join(''); }
